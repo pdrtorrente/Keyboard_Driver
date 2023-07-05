@@ -18,7 +18,7 @@ static int __init keyboard_driver_init(void)
 {
     printk(KERN_INFO "Keyboard driver initialized\n");
 
-    // Registre o manipulador de eventos do teclado
+    // Registra o manipulador de eventos do teclado
     if (register_keyboard_notifier(&keyboard_notifier))
     {
         printk(KERN_ERR "Failed to register keyboard notifier\n");
@@ -32,7 +32,7 @@ static void __exit keyboard_driver_exit(void)
 {
     printk(KERN_INFO "Keyboard driver exiting\n");
 
-    // Desregistre o manipulador de eventos do teclado
+    // Desregistra o manipulador de eventos do teclado
     unregister_keyboard_notifier(&keyboard_notifier);
 }
 
@@ -51,14 +51,11 @@ int keyboard_notifier(struct notifier_block *nblock, unsigned long code, void *_
             if(i < 100){
         		message[i] = param->value;
         		i++;
-        	} else {
-	        	return;
-    		}
+        	}
         }
         else if (param->value == 0)
         {
             printk(KERN_INFO "Key released: %d\n", param->value);
-            // Faça alguma ação em resposta à tecla liberada
         }
     }
 
